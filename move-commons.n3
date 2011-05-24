@@ -23,7 +23,7 @@
     dcterms:audience dbpedia:Community ;
     dcterms:created "2010-07-03"^^xsd:date ;
     dcterms:modified "2010-08-01"^^xsd:date ;
-    dcterms:issued "2010-xx-xx"^^xsd:date ; # To be changed on first publishing
+    dcterms:issued "2011-05-24"^^xsd:date ; 
     vann:preferredNamespacePrefix "mc" ;
     vann:preferredNamespaceUri "http://movecommons.org/ns#" ;
     rdfs:comment "Move Commons is a simple & effective tool for collectives to declare the core principles they are committed to. This is the vocabulary used for semantics of the Commons, its domains, collectives and initaatives."@en ;

@@ -1,0 +1,362 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix mc: <http://movecommons.org/ns#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.geonames.org/ontology> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+
+# Metadata
+
+<http://movecommons.org/ns#> a owl:Ontology ;
+    owl:versionInfo "20100704" ;
+    dcterms:identifier <http://movecommons.org/ns> ;
+    dcterms:title "Move Commons vocabulary"@en ;
+    dcterms:subject dbpedia:Commons ;
+    dcterms:coverage dbpedia:World ;
+    dcterms:audience dbpedia:Community ;
+    dcterms:created "2010-07-03"^^xsd:date ;
+    dcterms:modified "2010-08-01"^^xsd:date ;
+    dcterms:issued "2010-xx-xx"^^xsd:date ; # To be changed on first publishing
+    vann:preferredNamespacePrefix "mc" ;
+    vann:preferredNamespaceUri "http://movecommons.org/ns#" ;
+    rdfs:comment "Move Commons is a simple & effective tool for collectives to declare the core principles they are committed to. This is the vocabulary used for semantics of the Commons, its domains, collectives and initaatives."@en ;
+    owl:imports <http://www.w3.org/2003/06/sw-vocab-status/ns>, foaf: ;
+    cc:license <http://creativecommons.org/licenses/by-sa/3.0/es> .
+
+# =======
+# Classes
+# =======
+
+mc:Commons a rdfs:Class, owl:Class ;
+    rdfs:label "Commons" ;
+    rdfs:comment "A Commons"@en;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Collective a rdfs:Class, owl:Class ;
+    owl:sameAs foaf:Group ;
+    rdfs:label "Collective" ;
+    rdfs:comment "A group of entities that share or are motivated by at least one common issue or interest, or work together on a specific project(s) to achieve a common objective (Wikipedia)"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:CommonsDomain a rdfs:Class, owl:Class ;
+    rdfs:label "Commons Domain" ;
+    rdfs:comment "A Commons domain: Nature, Body, Town, Digital"@en;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Volunteer a rdfs:Class, owl:Class, foaf:Person ;
+    rdfs:label "A Volunteer" ;
+    rdfs:comment "A Volunteer is any Person who helps or is willing to help a Collective"@en;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Benefit a rdfs:Class, owl:Class ;
+    rdfs:label "A Benefit" ;
+    rdfs:comment "A Beneficial item for a Collective"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:OnlineTool a rdfs:Class, owl:Class ;
+    rdfs:label "An online tool" ;
+    rdfs:comment "An Online Tool offered by a Collective in support of its aims"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc: a owl:AllDisjointClasses;
+    owl:members ( mc:Commons mc:Collective mc:CommonsDomain mc:Volunteer mc:Benefit mc:OnlineTool ) .
+
+# ==========
+# Subclasses
+# ==========
+
+# Collectives
+# -----------
+
+mc:NonProfit a mc:Collective ;
+    rdfs:subClassOf mc:Collective ;
+    rdfs:label "Non profit" ;
+    rdfs:comment "A non profit Collective"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:ForProfit a mc:Collective ;
+    rdfs:subClassOf mc:Collective ;
+    rdfs:label "For profit" ;
+    rdfs:comment "A for profit Collective"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:NonProfit owl:disjointWith mc:ForProfit .
+mc:ForProfit owl:disjointWith mc:NonProfit .
+
+mc:Reproducible a mc:Collective ;
+    rdfs:subClassOf mc:Collective ;
+    rdfs:label "Reproducible" ;
+    rdfs:comment "A Collective that produces shareable actions/knowledge"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Exclusive a mc:Collective ;
+    rdfs:subClassOf mc:Collective ;
+    rdfs:label "Exclusive" ;
+    rdfs:comment "A Collective that produces non shareable knowledge"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Reproducible owl:disjointWith mc:Exclusive .
+mc:Exclusive owl:disjointWith mc:Reproducible .
+
+mc:ReinforcesCommons a mc:Collective ;
+    rdfs:subClassOf mc:Collective ;
+    rdfs:label "Reinforces Commons" ;
+    rdfs:comment "A Collective that reinforces the Commons"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:ReinforcesOtherAims a mc:Collective ;
+    rdfs:subClassOf mc:Collective ;
+    rdfs:label "Reinforces other aims" ;
+    rdfs:comment "A Collective that reinforces other aims and does not reinforce the Commons"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:ReinforcesCommons owl:disjointWith mc:ReinforcesOtherAims .
+mc:ReinforcesOtherAims owl:disjointWith mc:ReinforcesCommons .
+
+mc:GrassRoots a mc:Collective ;
+    rdfs:subClassOf mc:Collective ;
+    rdfs:label "Grass Roots" ;
+    rdfs:comment "A grass roots decentralized Collective"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Hierarchical a mc:Collective ;
+    rdfs:subClassOf mc:Collective ;
+    rdfs:label "Hierarchical" ;
+    rdfs:comment "A hierarchical or centralized Collective"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:GrassRoots owl:disjointWith mc:Hierarchical .
+mc:Hierarchical owl:disjointWith mc:GrassRoots .
+
+# Commons Domains
+# ---------------
+
+mc:Body a mc:CommonsDomain ;
+    rdfs:subClassOf mc:CommonsDomain ;
+    rdfs:label "Body" ;
+    rdfs:comment "A Commons focused in the body/health"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Nature a mc:CommonsDomain ;
+    rdfs:subClassOf mc:CommonsDomain ;
+    rdfs:label "Nature" ;
+    rdfs:comment "A Commons focused in the nature/ecology"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Town a mc:CommonsDomain ;
+    rdfs:subClassOf mc:CommonsDomain ;
+    rdfs:label "Town" ;
+    rdfs:comment "A Commons focused in the town/urban/society"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Digital a mc:CommonsDomain ;
+    rdfs:subClassOf mc:CommonsDomain ;
+    rdfs:label "Digital" ;
+    rdfs:comment "A Commons focused in the digital"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+# Benefits
+# --------
+
+mc:Money a mc:Benefit ;
+    rdfs:subClassOf mc:Benefit ;
+    rdfs:label "Money" ;
+    rdfs:comment "Money"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:VolunteerWork a mc:Benefit ;
+    rdfs:subClassOf mc:Benefit ;
+    rdfs:label "Volunteer work" ;
+    rdfs:comment "Volunteer work"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+mc:Supplies a mc:Benefit ;
+    rdfs:subClassOf mc:Benefit ;
+    rdfs:label "Supplies" ;
+    rdfs:comment "Any supplies for a Collective"@en ;
+    rdfs:isDefinedBy mc: ;
+    vs:term_status "unstable"@en .
+
+# ==========
+# Properties
+# ==========
+
+# Commons properties
+# ------------------
+
+mc:isInCommonsDomain a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "is in a Commons Domain" ;
+    rdfs:comment "a Commons is in a Commons Domain"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Commons ;
+    rdfs:range mc:CommonsDomain ;
+    vs:term_status "unstable"@en .
+
+# Collectives properties
+# ----------------------
+
+mc:moveCommonsType a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "move commons type" ;
+    rdfs:comment "a Resource is a Move Commons Collective type"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range mc:Collective ;
+    vs:term_status "unstable"@en .
+
+mc:reinforcesCommons a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "reinforces commons" ;
+    rdfs:comment "a Reinforces Commons Collective reinforces a Commons"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:ReinforcesCommons ;
+    rdfs:range mc:Commons ;
+    vs:term_status "unstable"@en .
+
+mc:reinforcesOtherAims a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "reinforces other aims" ;
+    rdfs:comment "a Reinforces Other Aims Collective reinforces other aims"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:ReinforcesOtherAims ;
+    rdfs:range rdfs:Resource ;
+    vs:term_status "unstable"@en .
+
+mc:isReinforcedBy a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "is reinforced by" ;
+    rdfs:comment "a Resource is reinforced by a Collective"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range mc:Collective ;
+    vs:term_status "unstable"@en .
+
+mc:shares a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "shares" ;
+    rdfs:comment "a Reproducible Collective shares a Resource"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Reproducible ;
+    rdfs:range rdfs:Resource ;
+    vs:term_status "unstable"@en .
+
+mc:focusesIn a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "focuses in" ;
+    rdfs:comment "a Collective has a focus in a Commons Domain"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Collective ;
+    rdfs:range mc:CommonsDomain ;
+    owl:inverseOf mc:isFocusOf ;
+    vs:term_status "unstable"@en .
+
+mc:isFocusOf a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "is focus of" ;
+    rdfs:comment "a Commons Domain is the focus of a Collective"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:CommonsDomain ;
+    rdfs:range mc:Collective ;
+    owl:inverseOf mc:focusesIn ;
+    vs:term_status "unstable"@en .
+
+mc:howToHelpPage a rdfs:Property, owl:ObjectProperty ;
+    rdfs:subPropertyOf foaf:page ;
+    rdfs:label "how to help page" ;
+    rdfs:comment "a Collective has a web page on how to help"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Collective ;
+    rdfs:range foaf:Page ;
+    vs:term_status "unstable"@en .
+
+mc:locationActivity a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "location activity" ;
+    rdfs:comment "a Collective develops its activity in a location"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Collective ;
+    rdfs:range rdfs:Resource ;
+    vs:term_status "unstable"@en .
+
+mc:hasOnlineTool a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "has tool" ;
+    rdfs:comment "a Collective offers an online tool"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Collective ;
+    rdfs:range mc:OnlineTool ;
+    vs:term_status "unstable"@en .
+
+mc:wouldBenefitFrom a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "would benefit from" ;
+    rdfs:comment "a Collective would benefit from a Benefit (volunteer work, donations...)"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Collective ;
+    rdfs:range mc:Benefit ;
+    vs:term_status "unstable"@en .
+
+mc:wouldBenefitFromWork a rdfs:Property, owl:ObjectProperty ;
+    rdfs:subPropertyOf mc:wouldBenefitFrom ;
+    rdfs:label "would benefit from a work" ;
+    rdfs:comment "a Collective would benefit from a work"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Collective ;
+    rdfs:range mc:Work ;
+    vs:term_status "unstable"@en .
+
+mc:wouldBenefitFromSupply
+    rdfs:subPropertyOf mc:wouldBenefitFrom ;
+    rdfs:label "would benefit from a supply" ;
+    rdfs:comment "a Collective would benefit from a supply"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Collective ;
+    rdfs:range mc:Supplies ;
+    vs:term_status "unstable"@en .
+
+# Volunteer properties
+# --------------------
+
+mc:collaboratesWith a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "collaborates with" ;
+    rdfs:comment "a Volunteer collaborates with a Collective"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Volunteer ;
+    rdfs:range mc:Collective ;
+    owl:inverseOf mc:hasCollaborator ;
+    vs:term_status "unstable"@en .
+
+mc:hasCollaborator a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "has a collaborator" ;
+    rdfs:comment "a Collective receives a Volunteer collaboration"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Collective ;
+    rdfs:range mc:Volunteer ;
+    owl:inverseOf mc:collaboratesWith ;
+    vs:term_status "unstable"@en .
+
+mc:wouldWorkIn a rdfs:Property, owl:ObjectProperty ;
+    rdfs:label "would work in" ;
+    rdfs:comment "a Volunteer would work in a VolunteerWork"@en ;
+    rdfs:isDefinedBy mc: ;
+    rdfs:domain mc:Volunteer ;
+    rdfs:range mc:VolunteerWork ;
+    vs:term_status "unstable"@en .
+

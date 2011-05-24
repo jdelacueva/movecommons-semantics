@@ -26,7 +26,7 @@
     dcterms:issued "2011-05-24"^^xsd:date ; 
     vann:preferredNamespacePrefix "mc" ;
     vann:preferredNamespaceUri "http://movecommons.org/ns#" ;
-    rdfs:comment "Move Commons is a simple & effective tool for collectives to declare the core principles they are committed to. This is the vocabulary used for semantics of the Commons, its domains, collectives and initaatives."@en ;
+    rdfs:comment "Move Commons is a simple & effective tool for collectives to declare the core principles they are committed to. This is the vocabulary used for semantics of the Commons, its domains, collectives and initiatives."@en ;
     owl:imports <http://www.w3.org/2003/06/sw-vocab-status/ns>, foaf: ;
     cc:license <http://creativecommons.org/licenses/by-sa/3.0/es> .
 
